@@ -20,7 +20,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   const allDocuments = getDocuments();
-  console.log(allDocuments);
 
   return (
     <html
@@ -28,22 +27,26 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col" suppressHydrationWarning>
-        <Header  docs={allDocuments} />
-        <div className="relative px-4 pt-14 sm:px-6 lg:px-8"> 
-          
-          
+      <body className="min-h-full bg-white dark:bg-zinc-900" suppressHydrationWarning>
+        
+        {/* Fixed left sidebar */}
+        <Header docs={allDocuments} />
+
+        {/* ✅ lg:pl-72 xl:pl-80 — sidebar width এর সমান left padding */}
+        <div className="relative px-4 pt-14 sm:px-6 lg:pl-72 lg:pr-8 xl:pl-80">
+
+          {/* Background gradient decoration */}
           <div className="absolute inset-0 -z-10 mx-0 max-w-none overflow-hidden">
             <div className="absolute left-1/2 top-0 ml-[-38rem] h-[25rem] w-[81.25rem] dark:[mask-image:linear-gradient(white,transparent)]">
               <div className="absolute inset-0 bg-gradient-to-r from-[#36b49f] to-[#DBFF75] opacity-40 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)] dark:from-[#36b49f]/30 dark:to-[#DBFF75]/30 dark:opacity-100" />
             </div>
           </div>
 
-          <main className="flex-auto py-16"> 
-            <article className="prose dark:prose-invert"> 
+          <main className="py-16">
+            <article className="prose dark:prose-invert">
               {children}
-            </article> 
-          </main> 
+            </article>
+          </main>
 
         </div>
       </body>
